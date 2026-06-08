@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chen Chen's Jewelry Official Store</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="logo">💎 Chen's Jewelry</div>
+    <nav>
+      <a href="#home">Home</a>
+      <a href="poster.html">Posters</a>
+      <a href="product.html">Products</a>
+      <a href="promo.html">Promo</a>
+      <a href="feedback.html">Feedback</a>
+      <a href="location.html">Location</a>
+      
+    </nav>
+    <button class="cart-btn" onclick="toggleCart()">🛒 Cart <span id="cartCount">0</span></button>
+  </header>
+
+  <section id="home" class="hero">
+    <div class="hero-text">
+      <h1>Chen's Jewelry Official Store</h1>
+      <p>Elegant jewelry for daily wear, gifts, and special moments.</p>
+      <a class="shop-now" href="product.html">Shop Now</a>
+    </div>
+  </section>
+
+  <section class="notice">
+  <h2>🎓 Student Discount</h2>
+
+  <p>
+    Students can enjoy an additional
+    <b>10% OFF</b> on all jewelry products.
+  </p>
+
+  <p>
+    Simply check the
+    <b>Student Discount</b>
+    option during checkout.
+  </p>
+
+  <p>
+    Valid student identification may be required.
+  </p>
+</section>
+  
+  <section class="notice">
+  <h2>🎁 Buy 1 Get 1 FREE</h2>
+
+  <p>
+    Buy any promotional jewelry product and get
+    <b>1 FREE item</b>.
+  </p>
+
+  <p>
+    Applicable to Products
+    <b>1–8 only</b>.
+  </p>
+
+  <p>
+    This promo can also be combined with the
+    <b>Student Discount</b>.
+  </p>
+</section>
+</section>
+
+  <section id="products" class="section product-only-section">
+
+<h2>Best Selling Products</h2>
+
+<p class="subtitle">
+Our most popular jewelry.
+</p>
+
+<div class="products"
+id="productList">
+</div>
+
+<div class="view-all-wrap">
+
+<a
+href="product.html"
+class="view-all-btn">
+
+View All Products →
+
+</a>
+
+</div>
+
+</section>
+
+</section>
+  <section id="feedback" class="section feedback-section">
+    <h2>⭐ Customer Feedback</h2>
+
+    <div class="reviews" id="homeReviews">
+        <div class="review">
+            Loading customer reviews...
+        </div>
+    </div>
+
+    <br>
+
+    <a href="feedback.html" class="view-all-btn">
+        ✍️ Leave Your Feedback
+    </a>
+
+</section>
+
+  <button class="chat-button" onclick="toggleChat()">💬 Chat Support</button>
+  <div id="chatBox" class="chat-box">
+    <div class="chat-header">Zhiqiang Chat Support <button onclick="toggleChat()">×</button></div>
+    <div id="chatMessages" class="chat-messages">
+
+    <div class="bot-message">
+    Hello! Welcome to Zhiqiang's Jewelry 💎
+    <br><br>
+
+    Choose below:
+    </div>
+    <div class="quick-options">
+    <button onclick="quickChat('Track My Order')">
+    📦 Track My Order
+    </button>
+    <button onclick="quickChat('Track Order')">
+    🚚 Track Order
+    </button>
+    <button onclick="quickChat('Current Promos')">
+    🎁 Current Promos
+    </button>
+    <button onclick="quickChat('Student Discount')">
+    🎓 Student Discount
+    </button>
+    <button onclick="quickChat('Contact Support')">
+    💬 Contact Support
+    </button>
+    </div>
+    </div>
+    <div class="chat-input-row">
+      <input id="chatInput" placeholder="Type your message..." onkeydown="if(event.key==='Enter') sendChat()" />
+      <button onclick="sendChat()">Send</button>
+    </div>
+  </div>
+
+  <aside id="cartPanel" class="cart-panel">
+    <button class="close" onclick="toggleCart()">×</button>
+    <h2>Your Cart</h2>
+    <div id="cartItems"></div>
+    <button
+    class="checkout"
+    onclick="goToOrderPage()">
+
+      Place Order
+
+  </button>
+  </aside>
+
+  <footer>
+    <p>© 2026 Chen's Jewelry Official Store. All rights reserved.</p>
+    <p>Contact Number: 0923456438</p>
+  </footer>
+
+<script src="script.js"></script>
+</body>
+</html>
