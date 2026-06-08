@@ -313,10 +313,21 @@ ${card}
 function addToCart(id) {
   const product = products.find(p => p.id === id);
   const item = cart.find(i => i.id === id);
-  if (item) item.qty++;
-  else cart.push({ ...product, qty: 1 });
+
+  if (item) {
+    item.qty++;
+  } else {
+    cart.push({ ...product, qty: 1 });
+  }
+
+  localStorage.setItem("cart", JSON.stringify(cart));
   renderCart();
-  document.getElementById('cartPanel').classList.add('open');
+
+  const cartPanel = document.getElementById("cartPanel");
+
+  if (cartPanel) {
+    cartPanel.classList.add("open");
+  }
 }
 
 function removeItem(id) {
