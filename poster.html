@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Posters - Chen's Jewelry</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+
+<body>
+
+<header class="topbar">
+  <div class="logo">💎 Chen's Jewelry</div>
+
+  <nav>
+    <a href="index.html#home">Home</a>
+    <a href="poster.html">Posters</a>
+    <a href="product.html">Products</a>
+    <a href="promo.html">Promo</a>
+    <a href="feedback.html">Feedback</a>
+    <a href="location.html">Location</a>
+    
+  </nav>
+
+  <button class="cart-btn" onclick="toggleCart()">
+    🛒 Cart <span id="cartCount">0</span>
+  </button>
+</header>
+
+<div class="page-header-space"></div>
+
+<section id="posters" class="poster-section section">
+
+<h2>Product Posters</h2>
+
+<p class="subtitle">
+Click a poster to view the product.
+</p>
+
+<div class="poster-slider">
+
+<img
+onclick="openPosterProduct(1)"
+src="assets/posters/1.png"
+alt="Product Poster 1"
+/>
+<img
+onclick="openPosterProduct(2)"
+src="assets/posters/2.png"
+alt="Product Poster 2"
+/>
+<img
+onclick="openPosterProduct(3)"
+src="assets/posters/3.png"
+alt="Product Poster 3"
+/>
+<img
+onclick="openPosterProduct(4)"
+src="assets/posters/4.png"
+alt="Product Poster 4"
+/>
+<img
+onclick="openPosterProduct(5)"
+src="assets/posters/5.png"
+alt="Product Poster 5"
+/>
+<img
+onclick="openPosterProduct(6)"
+src="assets/posters/6.png"
+alt="Product Poster 6"
+/>
+<img
+onclick="openPosterProduct(7)"
+src="assets/posters/7.png"
+alt="Product Poster 7"
+/>
+<img
+onclick="openPosterProduct(8)"
+src="assets/posters/8.png"
+alt="Product Poster 8"
+/>
+<img
+onclick="openPosterProduct(9)"
+src="assets/posters/9.png"
+alt="Product Poster 9"
+/>
+<img
+onclick="openPosterProduct(10)"
+src="assets/posters/10.png"
+alt="Product Poster 10"
+/>
+<img
+onclick="openPosterProduct(11)"
+src="assets/posters/11.png"
+alt="Product Poster 11"
+/>
+<img
+onclick="openPosterProduct(12)"
+src="assets/posters/12.png"
+alt="Product Poster 12"
+/>
+<img
+onclick="openPosterProduct(13)"
+src="assets/posters/13.png"
+alt="Product Poster 13"
+/>
+<img
+onclick="openPosterProduct(14)"
+src="assets/posters/14.png"
+alt="Product Poster 14"
+/>
+<img
+onclick="openPosterProduct(15)"
+src="assets/posters/15.png"
+alt="Product Poster 15"
+/>
+<img
+onclick="openPosterProduct(16)"
+src="assets/posters/16.png"
+alt="Product Poster 16"
+/>
+<img
+onclick="openPosterProduct(17)"
+src="assets/posters/17.png"
+alt="Product Poster 17"
+/>
+<img
+onclick="openPosterProduct(18)"
+src="assets/posters/18.png"
+alt="Product Poster 18"
+/>
+<img
+onclick="openPosterProduct(19)"
+src="assets/posters/19.png"
+alt="Product Poster 19"
+/>
+<img
+onclick="openPosterProduct(20)"
+src="assets/posters/20.png"
+alt="Product Poster 20"
+/>
+
+</div>
+
+<div
+class="poster-dots"
+id="posterDots">
+</div>
+
+</section>
+
+
+<!-- POPUP -->
+
+<div id="productPopup"
+class="product-popup">
+
+<div class="popup-box">
+
+<button
+class="popup-close"
+onclick="closePosterProduct()">
+
+×
+
+</button>
+
+<img
+id="popupImage"
+src="">
+
+<h2 id="popupName"></h2>
+
+<p id="popupPrice"></p>
+
+<button
+id="popupAddCart"
+class="popup-add-btn">
+
+Add to Cart
+
+</button>
+<br><br>
+
+<a
+id="popupViewProduct"
+href="#"
+class="popup-btn">
+
+View Product
+
+</a>
+
+</div>
+
+</div>
+
+
+<!-- CART PANEL -->
+
+<aside id="cartPanel" class="cart-panel">
+    <button class="close" onclick="toggleCart()">×</button>
+    <h2>Your Cart</h2>
+    <div id="cartItems"></div>
+    <button class="checkout" onclick="goToOrderPage()">Place Order</button>
+  </aside>
+
+
+
+
+<script src="script.js"></script>
+
+</body>
+</html>

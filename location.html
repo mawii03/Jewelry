@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Location - Chen's Jewelry</title>
+
+<link rel="stylesheet"
+href="style.css">
+
+</head>
+
+<body>
+
+<header class="topbar">
+  <div class="logo">💎 Chen's Jewelry</div>
+
+  <nav>
+    <a href="index.html#home">Home</a>
+    <a href="poster.html">Posters</a>
+    <a href="product.html">Products</a>
+    <a href="promo.html">Promo</a>
+    <a href="feedback.html">Feedback</a>
+    <a href="location.html">Location</a>
+    
+  </nav>
+
+  <button class="cart-btn" onclick="toggleCart()">
+    🛒 Cart <span id="cartCount">0</span>
+  </button>
+</header>
+<div class="page-header-space"></div>
+
+<section
+id="location"
+class="section location">
+
+<h2>
+📍 Store Location
+</h2>
+
+<p>
+Click the image below
+to open Google Maps
+</p>
+
+
+<div class="map-card">
+
+<a
+target="_blank"
+href="https://maps.app.goo.gl/P7M6PNQ71KiGHPsq8">
+
+<img
+src="assets/location-map.svg"
+alt="Store Map"
+class="clickable-map">
+
+</a>
+
+</div>
+
+</section>
+
+
+<section class="section">
+
+<h2>
+Store Information
+</h2>
+
+<div class="review">
+
+📍 Zhiqiang Jewelry Official Store
+
+<br><br>
+
+🕒 Open Daily:
+9:00 AM – 9:00 PM
+
+<br><br>
+
+📞 Contact:
+0923456438
+
+</div>
+
+</section>
+
+
+<footer>
+
+<p>
+© 2026 Chen's Jewelry Official Store
+</p>
+
+<p>
+Contact Number:
+0923456438
+</p>
+
+</footer>
+<aside id="cartPanel" class="cart-panel">
+    <button class="close" onclick="toggleCart()">×</button>
+    <h2>Your Cart</h2>
+    <div id="cartItems"></div>
+    <button class="checkout" onclick="goToOrderPage()">Place Order</button>
+  </aside>
+
+<button
+class="close"
+onclick="toggleCart()">
+
+×
+
+</button>
+
+
+
+</aside>
+<script src="script.js"></script>
+</body>
+</html>
