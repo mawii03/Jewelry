@@ -313,46 +313,94 @@ ${card}
 function addToCart(id) {
   const product = products.find(p => p.id === id);
   const item = cart.find(i => i.id === id);
-  if (item) item.qty++;
-  else cart.push({ ...product, qty: 1 });
+
+  if (item) {
+    item.qty++;
+  } else {
+    cart.push({ ...product, qty: 1 });
+  }
+
+  localStorage.setItem("cart", JSON.stringify(cart));
   renderCart();
-  document.getElementById('cartPanel').classList.add('open');
+
+  const cartPanel = document.getElementById("cartPanel");
+
+  if (cartPanel) {
+    cartPanel.classList.add("open");
+  }
 }
 
 function removeItem(id) {
   cart = cart.filter(item => item.id !== id);
   renderCart();
 }
+function cartQty(id, amount){
+
+  const item = cart.find(i => i.id === id);
+
+  if(!item) return;
+
+  if(item.qty === 1 && amount === -1){
+    cart = cart.filter(i => i.id !== id);
+  }else{
+    item.qty += amount;
+  }
+
+  localStorage.setItem("cart", JSON.stringify(cart));
+
+  renderCart();
+
+}
+
 function changeQty(id, amount){
 
-let cartProducts =
-JSON.parse(
-localStorage.getItem(
-"checkoutCart"
-)
-) || [];
+  let cartProducts =
+  JSON.parse(localStorage.getItem("checkoutCart")) || [];
 
-const item =
-cartProducts.find(
-p => p.id === id
-);
+  const item = cartProducts.find(p => p.id === id);
 
-if(!item) return;
+  if(!item) return;
 
-item.qty += amount;
+  if(item.qty === 1 && amount === -1){
 
-if(item.qty < 1){
-item.qty = 1;
+    cartProducts = cartProducts.filter(p => p.id !== id);
+
+    localStorage.setItem(
+      "checkoutCart",
+      JSON.stringify(cartProducts)
+    );
+
+    location.reload();
+
+    return;
+  }
+
+  item.qty += amount;
+
+  localStorage.setItem(
+    "checkoutCart",
+    JSON.stringify(cartProducts)
+  );
+
+  location.reload();
+}
+function deleteCheckoutItem(id){
+
+  let cartProducts =
+  JSON.parse(localStorage.getItem("checkoutCart")) || [];
+
+  cartProducts =
+  cartProducts.filter(item => item.id !== id);
+
+  localStorage.setItem(
+    "checkoutCart",
+    JSON.stringify(cartProducts)
+  );
+
+  location.reload();
+
 }
 
-localStorage.setItem(
-"checkoutCart",
-JSON.stringify(cartProducts)
-);
-
-location.reload();
-
-}
 
 function toggleCart() {
   document.getElementById('cartPanel').classList.toggle('open');
@@ -394,7 +442,21 @@ freeQty * item.price;
     <div class="cart-item">
       <div>
         <b>${item.name}</b><br>
-        NT$${item.price} x ${item.qty}
+        <div class="qty-box">
+
+<button onclick="cartQty(${item.id},-1)">
+-
+</button>
+
+<span>${item.qty}</span>
+
+<button onclick="cartQty(${item.id},1)">
++
+</button>
+
+</div>
+
+<p>NT$${item.price * item.qty}</p>
       </div>
       <button class="remove" onclick="removeItem(${item.id})">Remove</button>
     </div>
@@ -406,7 +468,8 @@ freeQty * item.price;
   const studentDiscountBox = document.getElementById('studentDiscountAmount');
   const totalBox = document.getElementById('total');
 
-  if (cartCount) cartCount.textContent = cart.reduce((sum, item) => sum + item.qty, 0);
+  if (cartCount)
+  cartCount.textContent = cart.length;
   if (subtotalBox) subtotalBox.textContent = subtotal;
   if (promoDiscountBox) promoDiscountBox.textContent = promoDiscount;
   if (studentDiscountBox) studentDiscountBox.textContent = studentDiscount;
@@ -863,7 +926,7 @@ const total =
 document.getElementById("summaryTotal").textContent;
 
 alert(
-"💎 Zhiqiang's Jewelry\n\n" +
+"💎 Chen's Jewelry\n\n" +
 "✅ Order Confirmed Successfully!\n\n" +
 "Order Number: " + orderNumber +
 "\nCustomer: " + name +
@@ -874,10 +937,24 @@ alert(
 "\n\nThank you for your purchase!"
 );
 
-cart = [];
-localStorage.removeItem("cart");
+const orderedItems =
+JSON.parse(localStorage.getItem("checkoutCart")) || [];
+
+let mainCart =
+JSON.parse(localStorage.getItem("cart")) || [];
+
+mainCart = mainCart.filter(cartItem =>
+  !orderedItems.some(orderItem => orderItem.id === cartItem.id)
+);
+
+localStorage.setItem(
+  "cart",
+  JSON.stringify(mainCart)
+);
+
 localStorage.removeItem("checkoutCart");
 
+cart = mainCart;
 window.location.href = "index.html";
 
 
@@ -979,13 +1056,30 @@ if(container){
 container.innerHTML = cartProducts.map(item=>{
 
 return `
+
 <div class="checkout-item">
 
 <img src="${item.image}" class="checkout-img">
 
 <div class="checkout-info">
 
+<div class="product-title-row">
+
 <h3>${item.name}</h3>
+
+<button
+class="delete-item-btn"
+onclick="deleteCheckoutItem(${item.id})">
+🗑️
+</button>
+
+</div>
+
+<div class="product-title-row">
+
+<h3>${item.name}</h3>
+
+</div>
 
 <p>${item.slogan || ""}</p>
 
@@ -1115,10 +1209,11 @@ function showReviews(){
     <p>${review.comment}</p>
     <p><small>Product: ${review.product}</small></p>
 
-    <button class="delete-review-btn"
+    <!--<button class="delete-review-btn"
       onclick="deleteReview(${index})">
       🗑 Delete
-    </button>
+    </button>-->
+
   </div>
 `;
 
