@@ -14,11 +14,14 @@
       <a href="poster.html">Posters</a>
       <a href="product.html">Products</a>
       <a href="promo.html">Promo</a>
-      <a href="feedback.html">Feedback</a>
-      <a href="location.html">Location</a>
+      <a href="about.html">About Us</a>
       
     </nav>
-    <button class="cart-btn" onclick="toggleCart()">🛒 Cart <span id="cartCount">0</span></button>
+    <div id="userArea">
+  <button class="cart-btn" onclick="openLogin()">
+    🔐 Login
+  </button>
+</div>
   </header>
   <div class="page-header-space"></div>
   <section class="section product-page-header">
@@ -32,7 +35,7 @@
 
   <button class="chat-button" onclick="toggleChat()">💬 Chat Support</button>
   <div id="chatBox" class="chat-box">
-    <div class="chat-header">Zhiqiang Chat Support <button onclick="toggleChat()">×</button></div>
+    <div class="chat-header">Chen's Jewelry Chat Support <button onclick="toggleChat()">×</button></div>
     <div id="chatMessages">
 
     <div class="bot-message">
@@ -72,6 +75,29 @@
     <div id="cartItems"></div>
     <button class="checkout"onclick="goToOrderPage()">Place Order</button>
   </aside>
+
+<div id="loginPopup" class="login-popup">
+  <div class="login-box">
+
+    <button class="login-close" onclick="closeLogin()">×</button>
+
+    <h2 id="loginTitle">Login</h2>
+
+    <input id="loginName" placeholder="Full Name">
+    <input id="loginEmail" placeholder="Email">
+    <input id="loginPassword" type="password" placeholder="Password">
+
+    <button class="checkout" onclick="loginUser()">
+      Login
+    </button>
+
+    <p>
+      Don't have an account?
+      <span onclick="showRegister()">Register</span>
+    </p>
+
+  </div>
+</div>
 
   <footer>
     <p>© 2026 Chen's Jewelry Official Store. All rights reserved.</p>

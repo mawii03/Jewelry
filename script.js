@@ -311,6 +311,13 @@ ${card}
 }
 
 function addToCart(id) {
+
+  if(!localStorage.getItem("loggedInUser")){
+    alert("🔐 Please login first before adding items to your cart.");
+    openLogin();
+    return;
+  }
+
   const product = products.find(p => p.id === id);
   const item = cart.find(i => i.id === id);
 
@@ -401,8 +408,13 @@ function deleteCheckoutItem(id){
 
 }
 
-
 function toggleCart() {
+
+  if(!isLoggedIn()){
+    requireLogin();
+    return;
+  }
+
   document.getElementById('cartPanel').classList.toggle('open');
 }
 
@@ -477,6 +489,7 @@ freeQty * item.price;
 }
 
 function checkout() {
+  
   const name = document.getElementById('name').value.trim();
   const phone = document.getElementById('phone').value.trim();
   const address = document.getElementById('address').value.trim();
@@ -883,11 +896,11 @@ const afterPromo = subtotal - promoDiscount;
 
 let studentDiscount = 0;
 
-const studentDiscountBox =
-document.getElementById("studentOrderDiscount");
+const verified =
+localStorage.getItem("studentVerified");
 
-if(studentDiscountBox && studentDiscountBox.checked){
-studentDiscount = Math.round(afterPromo * 0.10);
+if(verified === "true"){
+  studentDiscount = Math.round(afterPromo * 0.10);
 }
 
 const totalDiscount = promoDiscount + studentDiscount;
@@ -902,10 +915,27 @@ document.getElementById("summaryTotal").textContent = total;
 
 function placeDirectOrder(){
 
-const name = document.getElementById("customerName").value.trim();
-const phone = document.getElementById("customerPhone").value.trim();
-const address = document.getElementById("customerAddress").value.trim();
-const payment = document.getElementById("paymentMethod").value;
+if(!isLoggedIn()){
+  requireLogin();
+  return;
+}
+
+const name =
+document.getElementById("customerName").value.trim();
+
+const phone =
+document.getElementById("customerPhone").value.trim();
+
+if(!/^\d{10}$/.test(phone)){
+  alert("Phone number must be exactly 10 digits.");
+  return;
+}
+
+const address =
+document.getElementById("customerAddress").value.trim();
+
+const payment =
+document.getElementById("paymentMethod").value;
 
 if(!name || !phone || !address){
 alert("Please fill in your customer information.");
@@ -953,13 +983,18 @@ localStorage.setItem(
 );
 
 localStorage.removeItem("checkoutCart");
-
+localStorage.removeItem("studentVerified");
 cart = mainCart;
 window.location.href = "index.html";
 
 
 }
 function goToOrderPage(){
+
+if(!isLoggedIn()){
+  requireLogin();
+  return;
+}
 
 if(!cart.length){
 
@@ -1072,12 +1107,6 @@ class="delete-item-btn"
 onclick="deleteCheckoutItem(${item.id})">
 🗑️
 </button>
-
-</div>
-
-<div class="product-title-row">
-
-<h3>${item.name}</h3>
 
 </div>
 
@@ -1364,3 +1393,131 @@ if(window.location.pathname.includes("details.html")){
   }
 
 }
+function openBankPage(){
+
+  saveOrderInfo();
+
+  window.location.href = "bank-payment.html";
+
+}
+function saveOrderInfo(){
+
+  localStorage.setItem(
+    "orderCustomerName",
+    document.getElementById("customerName")?.value || ""
+  );
+
+  localStorage.setItem(
+    "orderCustomerPhone",
+    document.getElementById("customerPhone")?.value || ""
+  );
+
+  localStorage.setItem(
+    "orderCustomerAddress",
+    document.getElementById("customerAddress")?.value || ""
+  );
+
+}
+if(window.location.pathname.includes("order.html")){
+
+  const nameInput = document.getElementById("customerName");
+  const phoneInput = document.getElementById("customerPhone");
+  const addressInput = document.getElementById("customerAddress");
+
+  if(nameInput){
+    nameInput.value = localStorage.getItem("orderCustomerName") || "";
+  }
+
+  if(phoneInput){
+    phoneInput.value = localStorage.getItem("orderCustomerPhone") || "";
+  }
+
+  if(addressInput){
+    addressInput.value = localStorage.getItem("orderCustomerAddress") || "";
+  }
+
+  const savedPayment = localStorage.getItem("paymentMethod");
+  const paymentInput = document.getElementById("paymentMethod");
+
+  if(savedPayment && paymentInput){
+    paymentInput.value = savedPayment;
+  }
+
+}
+function openLogin(){
+  document.getElementById("loginPopup").classList.add("show");
+}
+
+function closeLogin(){
+  document.getElementById("loginPopup").classList.remove("show");
+}
+
+function showRegister(){
+  document.getElementById("loginTitle").textContent = "Register";
+}
+
+function loginUser(){
+
+  const name = document.getElementById("loginName").value.trim();
+  const email = document.getElementById("loginEmail").value.trim();
+  const password = document.getElementById("loginPassword").value.trim();
+
+  if(!name || !email || !password){
+    alert("Please complete your login information.");
+    return;
+  }
+
+  localStorage.setItem("loggedInUser", name);
+
+  closeLogin();
+  updateUserArea();
+}
+
+function logoutUser(){
+  localStorage.removeItem("loggedInUser");
+  updateUserArea();
+}
+
+function updateUserArea(){
+
+  const user = localStorage.getItem("loggedInUser");
+  const userArea = document.getElementById("userArea");
+
+  if(!userArea) return;
+
+  if(user){
+    userArea.innerHTML = `
+      <button class="cart-btn" onclick="toggleCart()">
+        🛒 Cart <span id="cartCount">0</span>
+      </button>
+
+      <div class="profile-badge">
+        👤 ${user}
+      </div>
+
+      <button class="logout-btn" onclick="logoutUser()">
+        Logout
+      </button>
+    `;
+
+    renderCart();
+
+  }else{
+    userArea.innerHTML = `
+      <button class="cart-btn" onclick="openLogin()">
+        🔐 Login
+      </button>
+    `;
+  }
+}
+
+updateUserArea();
+function isLoggedIn(){
+  return localStorage.getItem("loggedInUser") !== null;
+}
+
+function requireLogin(){
+  alert("Please login first before using the cart.");
+  openLogin();
+}
+

@@ -14,20 +14,29 @@
       <a href="poster.html">Posters</a>
       <a href="product.html">Products</a>
       <a href="promo.html">Promo</a>
-      <a href="feedback.html">Feedback</a>
-      <a href="location.html">Location</a>
+      <a href="about.html">About Us</a>
       
     </nav>
-    <button class="cart-btn" onclick="toggleCart()">🛒 Cart <span id="cartCount">0</span></button>
+    <div id="userArea">
+  <button class="cart-btn" onclick="openLogin()">
+    🔐 Login
+  </button>
+</div>
   </header>
 
   <section id="home" class="hero">
     <div class="hero-text">
       <h1>Chen's Jewelry Official Store</h1>
+
       <p>Elegant jewelry for daily wear, gifts, and special moments.</p>
+
+      <p class="hero-quote">
+        "Every piece of jewelry tells a story and creates lasting memories."
+      </p>
+
       <a class="shop-now" href="product.html">Shop Now</a>
     </div>
-  </section>
+</section>
 
   <section class="notice">
   <h2>🎓 Student Discount</h2>
@@ -65,7 +74,6 @@
     This promo can also be combined with the
     <b>Student Discount</b>.
   </p>
-</section>
 </section>
 
   <section id="products" class="section product-only-section">
@@ -114,7 +122,7 @@ View All Products →
 
   <button class="chat-button" onclick="toggleChat()">💬 Chat Support</button>
   <div id="chatBox" class="chat-box">
-    <div class="chat-header">Zhiqiang Chat Support <button onclick="toggleChat()">×</button></div>
+    <div class="chat-header">Chen's Jewelry Chat Support <button onclick="toggleChat()">×</button></div>
     <div id="chatMessages" class="chat-messages">
 
     <div class="bot-message">
@@ -159,6 +167,29 @@ View All Products →
 
   </button>
   </aside>
+
+  <div id="loginPopup" class="login-popup">
+  <div class="login-box">
+
+    <button class="login-close" onclick="closeLogin()">×</button>
+
+    <h2 id="loginTitle">Login</h2>
+
+    <input id="loginName" placeholder="Full Name">
+    <input id="loginEmail" placeholder="Email">
+    <input id="loginPassword" type="password" placeholder="Password">
+
+    <button class="checkout" onclick="loginUser()">
+      Login
+    </button>
+
+    <p>
+      Don't have an account?
+      <span onclick="showRegister()">Register</span>
+    </p>
+
+  </div>
+</div>
 
   <footer>
     <p>© 2026 Chen's Jewelry Official Store. All rights reserved.</p>

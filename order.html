@@ -19,10 +19,14 @@
 <a href="poster.html">Posters</a>
 <a href="product.html">Products</a>
 <a href="promo.html">Promo</a>
-<a href="feedback.html">Feedback</a>
-<a href="location.html">Location</a>
+<a href="about.html">About Us</a>
 
 </nav>
+<div id="userArea">
+  <button class="cart-btn" onclick="openLogin()">
+    🔐 Login
+  </button>
+</div>
 </header>
 
 <div class="page-header-space"></div>
@@ -54,13 +58,32 @@
 <h3><span>Total</span> NT$<span id="summaryTotal">0</span></h3>
 
 <input id="customerName" placeholder="Full Name">
-<input id="customerPhone" placeholder="Phone Number">
+<input
+id="customerPhone"
+type="tel"
+maxlength="10"
+placeholder="Phone Number">
 <input id="customerAddress" placeholder="Address">
 
-<label class="student-check">
-<input type="checkbox" id="studentOrderDiscount" onchange="calculateOrderTotal()">
-Student Discount 10% OFF
-</label>
+<div class="student-discount-verify"
+onclick="window.location.href='student-discount.html'">
+
+  <div class="student-verify-icon">
+    🎓
+  </div>
+
+  <div>
+
+    <h3>Student Discount</h3>
+
+    <p>
+      Click here to verify your student information
+      and receive 10% OFF.
+    </p>
+
+  </div>
+
+</div>
 
 <h3>Payment Method</h3>
 
@@ -70,17 +93,17 @@ Student Discount 10% OFF
 <p>COD</p>
 </div>
 
-<div class="payment-card" onclick="selectPayment('Bank Transfer')">
+<div class="payment-card" onclick="openBankPage()">
 <img src="assets/payment/Bank Transfer.png">
 <p>Bank</p>
 </div>
 
-<div class="payment-card" onclick="selectPayment('Credit Card')">
+<div class="payment-card" onclick="window.location.href='credit-card.html'">
 <img src="assets/payment/Credit.png">
 <p>Card</p>
 </div>
 
-<div class="payment-card" onclick="selectPayment('E-Wallet')">
+<div class="payment-card" onclick="window.location.href='e-wallet.html'">
 <img src="assets/payment/ewallet.png">
 <p>E-Wallet</p>
 </div>
@@ -110,6 +133,43 @@ Enjoy secure checkout and customer support.
 </div>
 
 </section>
+
+<aside id="cartPanel" class="cart-panel">
+  <button class="close" onclick="toggleCart()">×</button>
+
+  <h2>Your Cart</h2>
+
+  <div id="cartItems"></div>
+
+  <button
+    class="checkout"
+    onclick="goToOrderPage()">
+    Place Order
+  </button>
+</aside>
+
+<div id="loginPopup" class="login-popup">
+  <div class="login-box">
+
+    <button class="login-close" onclick="closeLogin()">×</button>
+
+    <h2 id="loginTitle">Login</h2>
+
+    <input id="loginName" placeholder="Full Name">
+    <input id="loginEmail" placeholder="Email">
+    <input id="loginPassword" type="password" placeholder="Password">
+
+    <button class="checkout" onclick="loginUser()">
+      Login
+    </button>
+
+    <p>
+      Don't have an account?
+      <span onclick="showRegister()">Register</span>
+    </p>
+
+  </div>
+</div>
 
 <footer>
 <p>© 2026 Chen's Jewelry Official Store</p>
