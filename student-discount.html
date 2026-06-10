@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Student Verification - Chen's Jewelry</title>
+
+<link rel="stylesheet" href="style.css">
+
+<style>
+
+.student-page{
+max-width:700px;
+margin:120px auto 50px;
+padding:30px;
+}
+
+.student-card{
+
+background:white;
+
+padding:30px;
+
+border-radius:25px;
+
+box-shadow:0 10px 25px rgba(0,0,0,.1);
+
+}
+
+.student-card h1{
+
+text-align:center;
+
+color:#d84f93;
+
+margin-bottom:10px;
+
+}
+
+.student-card p{
+
+text-align:center;
+
+margin-bottom:25px;
+
+color:#666;
+
+}
+
+.student-card input{
+
+width:100%;
+
+padding:14px;
+
+margin-bottom:15px;
+
+border:1px solid #ddd;
+
+border-radius:12px;
+
+font-size:15px;
+
+}
+
+.student-card label{
+
+display:block;
+
+font-weight:bold;
+
+margin-bottom:8px;
+
+color:#444;
+
+}
+
+.upload-box{
+
+padding:15px;
+
+border:2px dashed #d84f93;
+
+border-radius:12px;
+
+margin-bottom:20px;
+
+background:#fff7fb;
+
+}
+
+.submit-student{
+
+width:100%;
+
+padding:15px;
+
+border:none;
+
+background:#d84f93;
+
+color:white;
+
+font-size:16px;
+
+font-weight:bold;
+
+border-radius:12px;
+
+cursor:pointer;
+
+}
+
+.submit-student:hover{
+
+background:#b93d7b;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header class="topbar">
+
+<div class="logo">💎 Chen's Jewelry</div>
+
+<nav>
+<a href="index.html">Home</a>
+<a href="product.html">Products</a>
+<a href="promo.html">Promo</a>
+</nav>
+
+</header>
+
+<div class="student-page">
+
+<a href="order.html" class="back-link">
+  ← Back to Order Summary
+</a>
+
+<div class="student-card">
+
+<h1>🎓 Student Verification</h1>
+
+<p>
+Complete the information below to receive
+10% Student Discount.
+</p>
+
+<input
+id="studentName"
+placeholder="Full Name">
+
+<input
+id="studentId"
+placeholder="Student ID Number">
+
+<input
+id="studentSchool"
+placeholder="University Name">
+
+<div class="upload-box">
+
+<label>
+Upload Student ID
+</label>
+
+<input
+type="file"
+id="studentCard"
+accept="image/*">
+
+</div>
+
+<button
+class="submit-student"
+onclick="submitStudentVerification()">
+
+Submit Verification
+
+</button>
+
+</div>
+
+</div>
+
+<script>
+
+function submitStudentVerification(){
+
+const name =
+document.getElementById(
+"studentName"
+).value.trim();
+
+const studentId =
+document.getElementById(
+"studentId"
+).value.trim();
+
+const school =
+document.getElementById(
+"studentSchool"
+).value.trim();
+
+const card =
+document.getElementById(
+"studentCard"
+).files.length;
+
+if(
+!name ||
+!studentId ||
+!school ||
+!card
+){
+
+alert(
+"Please complete all required information."
+);
+
+return;
+
+}
+
+localStorage.setItem(
+"studentVerified",
+"true"
+);
+
+alert(
+"🎓 Verification Submitted Successfully!\n\n10% Student Discount Applied."
+);
+
+window.location.href =
+"order.html";
+
+}
+
+</script>
+
+</body>
+</html>

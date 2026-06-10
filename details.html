@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Product Details</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header class="topbar">
+  <div class="logo">💎 Chen's Jewelry</div>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="poster.html">Posters</a>
+    <a href="product.html">Products</a>
+    <a href="promo.html">Promo</a>
+    <a href="about.html">About Us</a>
+
+  </nav>
+</header>
+
+<section class="checkout-page">
+
+  <a href="product.html" class="continue-link">‹ Continue Browsing</a>
+
+  <h1>Product Details</h1>
+
+  <div class="checkout-item product-detail-card">
+
+    <img id="detailImage" class="checkout-img">
+
+    <div class="checkout-info">
+      <h3 id="detailName"></h3>
+
+      <p id="detailDescription"></p>
+
+      <div class="checkout-row">
+        <div>
+          <span>Price</span>
+          <b id="detailPrice"></b>
+        </div>
+
+        <div>
+          <span>Category</span>
+          <b id="detailCategory"></b>
+        </div>
+
+        <div>
+          <span>Style</span>
+          <b id="detailStyle"></b>
+        </div>
+      </div>
+
+      <div class="order-item-content show">
+        <p><b>Material:</b> <span id="detailMaterial"></span></p>
+        <p><b>Occasion:</b> <span id="detailOccasion"></span></p>
+      </div>
+
+      <button id="detailCart" class="checkout">
+        🛒 Add to Cart
+      </button>
+    </div>
+
+  </div>
+
+</section>
+
+<script src="script.js"></script>
+
+</body>
+</html>
